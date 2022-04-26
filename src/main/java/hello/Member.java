@@ -14,33 +14,29 @@ import java.util.Date;
 @Entity
 public class Member {
 
+    //IDENTITY: DB에 위임
+//persist(insert) 시에 즉시 DB에 쿼리 실행 (key전략을 JPA에서 파악 불가)
+//따라서 여러개를 한번에 INSERT가 불가ㅇㅇ
+
+
+    //SEQUENCE: 시퀀스 객체를 만들어서 규칙 관리
+    //엔티티 클래스 @SequenceGenerator 어노테이션을 사용해
+    //name = "제너레이터 명", sequenceName = "MEMBER_SEQ"//DB내부 시퀀스 명
+    //initialValue = 1, allocationSize = 50(증가량)
+    //등의 매개변수로 지정 후
+    //generator = "제너레이터 명"을 매개변수로 전달해 설정
+
+    //TABLE: 테이블에서 지정된 전략사용
+    //@TableGenerator(name="제너레이터 명", table="시퀀스 저장용 테이블명"
+    // , pkColumnValue="sequence_name 컬렴명", allocationSize= 증감량)
+    //대충 시퀀스 저장용 테이블에서 pkColumnValue에 입력한 값을 SEQUENCE_NAME컬럼에
+    //저장하고 다음 key 값을 next_val에 저장하는 방식
+    //valueColumnNa="next_val컬럼명"
+    //uniqueConstraint = 시퀀스 테이블 제약조건
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    //unique는 Tagble에서 uniqueConstraints로 하고 컬럼에서하면 랜덤 문자열이기 때문에 사용하지 않는다.
-    @Column(name="name", insertable = false,
-            updatable = false, nullable = false,
-            unique = false, columnDefinition = "varchar(100) default 'EMPTY'")
-    private String username;
-
-//    @Column(precision = "소수점포함 전체 자릿수", scale = "소수점 자릿수")
-    private BigDecimal age;
-
-    //ORDINAL은 enum변경시 기존 로우들이 변경되지 않아 이슈가 생길 수 있다.
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
-
-    @Temporal(TemporalType.TIMESTAMP)//DATE 날짜 TIME 시간 TIMESTAMP 모두 포한
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    @Lob//큰 varchar를 외부파일로 저장
-    private String description;
-
-    @Transient//임시필드 DB저장x
-    private int temp;
 
     public Member(){}
 }
