@@ -8,12 +8,6 @@ import java.util.List;
 
 public class JpaMain {
 
-    Member create(Long id, String name){
-        Member member = new Member();
-        member.setId(id);
-        member.setName(name);
-        return member;
-    }
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");

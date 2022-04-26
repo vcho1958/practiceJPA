@@ -14,6 +14,14 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+<!--            DDL은 개발에서만 사용 테이블 중심->객체 중심-->
+<!--            create = drop후 create-->
+<!--            create-drop = create와 동일하나 종료시 drop-->
+<!--            update 변경분만 반영 (운영 시 x) alter관련 키워드로 테이블 컬럼 갱신 추가는 되나 삭제는 거부-->
+<!--            validate = 매핑이 정상적으로 됐는지 여부를 확인 -->
+            <property name="hibernate.jdbc.batch_size" value="10"/>
+            <!--            SQL지연 저장소가 10개가되면 쿼리 실행-->
             <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
         </properties>
     </persistence-unit>
