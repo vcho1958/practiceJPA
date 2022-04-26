@@ -1,8 +1,6 @@
 package hello;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 //@Entity(name = "JPA에서 인식할 이름(쿼리 등에서)")
@@ -10,13 +8,14 @@ import javax.persistence.Table;
 //final 클래스, enum, interface, inner클래스 사용 x
 // 저장할 필드에 final 사용 x
 //@Table(name = "USER") 테이블 명 별도 지정
-//@Table(catalog ,schema = ,uniqueConstraints = )
+//@Table(catalog ,schema = ,uniqueConstraints = {@UniqueConstraint(name = "NAME_AGE_UNUQUE", columnNames = {"NAME", "AGE"})})
 public class Member {
     public Long getId() {
         return id;
     }
 
     //Column(name = "username") 컬럼명 별도 지정
+    @Column(unique = true, length = 10)
     public void setId(Long id) {
         this.id = id;
     }
