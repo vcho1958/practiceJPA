@@ -19,6 +19,8 @@ public class JpaMain {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
+        //em.setFlushMode(FlushModeType.COMMIT); //commit시에만 flush
+        //FlushType.AUTO//쿼리 실행시에도 flush 기본값
         tx.begin();
         try {
 // 모든 DB 작업은 쓰기 지연 SQL 저장소에 쌓인 후 tx.commit()과정에서 시작함
@@ -40,6 +42,7 @@ public class JpaMain {
                     .getResultList();
 //            em.detach(member);//DB추적 분리
 //            em.remove(member);//제거
+            //em.flush() 지연 SQL실행
             tx.commit();
         }catch (Exception e){
             tx.rollback();//롤백
