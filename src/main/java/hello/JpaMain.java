@@ -40,7 +40,8 @@ public class JpaMain {
                     .setFirstResult(5)//skip
                     .setMaxResults(8)//limit
                     .getResultList();
-//            em.detach(member);//DB추적 분리
+//            em.detach(member);//DB추적 분리(준영속으로 변경) em.flush에서 1차캐시에서 비교 안함
+//            em.clear();//1차캐시 전체 detach
 //            em.remove(member);//제거
             //em.flush() 지연 SQL실행
             tx.commit();
