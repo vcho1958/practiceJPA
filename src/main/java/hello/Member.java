@@ -11,7 +11,7 @@ import java.util.Date;
 // 저장할 필드에 final 사용 x
 //@Table(name = "USER") 테이블 명 별도 지정
 //@Table(catalog ,schema = ,uniqueConstraints = {@UniqueConstraint(name = "NAME_AGE_UNUQUE", columnNames = {"NAME", "AGE"})})
-@Entity
+//@Entity
 public class Member {
 
     //IDENTITY: DB에 위임
